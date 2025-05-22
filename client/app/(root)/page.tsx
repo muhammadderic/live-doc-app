@@ -2,7 +2,6 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { 
   Show,
-  SignedIn, 
   SignInButton, 
   SignUpButton, 
   UserButton 
