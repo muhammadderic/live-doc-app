@@ -10,8 +10,9 @@ import {
 
 import Header from "@/components/Header";
 import { Editor } from "./editor/Editor";
+import ActiveCollaborators from "./ActiveCollaborators";
 
-const CollaborativeRoom = ({ roomId }: CollaborativeRoomProps) => {
+const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<div>Loading…</div>}>
@@ -19,6 +20,8 @@ const CollaborativeRoom = ({ roomId }: CollaborativeRoomProps) => {
           {/* Header */}
           <Header className="sticky left-0 top-0">
             <div className="flex items-center gap-2 lg:gap-4">
+              <ActiveCollaborators />
+
               <Show when="signed-out">
                 <SignInButton />
                 <SignUpButton>

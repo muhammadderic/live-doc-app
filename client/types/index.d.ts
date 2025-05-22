@@ -7,6 +7,12 @@ declare type AccessType = ["room:write"] | ["room:read", "room:presence:write"];
 
 declare type RoomAccesses = Record<string, AccessType>;
 
+declare type RoomMetadata = {
+  creatorId: string;
+  email: string;
+  title: string;
+};
+
 declare type CreateDocumentParams = {
   userId: string;
   email: string;
@@ -24,7 +30,7 @@ declare type HeaderProps = {
 
 declare type CollaborativeRoomProps = {
   roomId: string;
-  // roomMetadata: RoomMetadata;
+  roomMetadata: RoomMetadata;
   // users: User[];
   // currentUserType: UserType;
 };
