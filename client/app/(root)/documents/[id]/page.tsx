@@ -3,7 +3,6 @@ import { currentUser } from "@clerk/nextjs/server";
 
 import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getDocument } from "@/lib/actions/room.actions";
-import { getClerkUsers } from "@/lib/actions/user.actions";
 
 interface PageProps {
   params: Promise<{ id: string }>;
