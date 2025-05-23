@@ -34,3 +34,5 @@ declare type CollaborativeRoomProps = {
   // users: User[];
   // currentUserType: UserType;
 };
+
+declare type DeleteModalProps = { roomId: string };

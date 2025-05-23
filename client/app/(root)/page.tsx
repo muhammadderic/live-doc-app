@@ -13,6 +13,7 @@ import { getDocuments } from "@/lib/actions/room.actions";
 import { dateConverter } from "@/lib/utils";
 import Header from "@/components/Header";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
+import { DeleteModal } from "@/components/DeleteModal";
 
 export interface LiveblocksRoomData {
   id: string;
@@ -74,7 +75,7 @@ const Home = async () => {
                   </div>
                 </Link>
 
-                {/* Delete Modal */}
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>

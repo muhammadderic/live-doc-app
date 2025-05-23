@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { Liveblocks } from "@liveblocks/node";
 
 import { parseStringify } from '../utils';
+import { redirect } from 'next/navigation';
 
 const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY!,
@@ -81,5 +82,16 @@ export const updateDocument = async (roomId: string, title: string) => {
     return parseStringify(updatedRoom);
   } catch (error) {
     console.log(`Error happened while updating a room: ${error}`);
+  }
+}
+
+// DELETE DOCUMENT
+export const deleteDocument = async (roomId: string) => {
+  try {
+    await liveblocks.deleteRoom(roomId);
+    revalidatePath('/');
+    redirect('/');
+  } catch (error) {
+    console.log(`Error happened while deleting a room: ${error}`);
   }
 }
