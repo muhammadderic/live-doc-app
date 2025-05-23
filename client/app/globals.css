@@ -336,44 +336,6 @@
   }
 }
 
-@utility editor-wrapper {
-  height: calc(100vh - 140px);
-  gap: 1.25rem;
-  overflow: auto;
-  padding: 1.25rem;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  @media (min-width: 1280px) {
-    gap: 2.5rem;
-    padding-top: 2.5rem;
-  }
-
-  /* Webkit scrollbar styles directly nested */
-  &::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-    border-radius: 50px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #09090a;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #2e3d5b;
-    border-radius: 50px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #7878a3;
-  }
-}
-
 @utility header {
   min-height: 92px;
   min-width: 100%;

@@ -20,7 +20,12 @@ import { Editor } from "./editor/Editor";
 import { Input } from "./ui/input";
 import ActiveCollaborators from "./ActiveCollaborators";
 
-const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
+const CollaborativeRoom = ({ 
+  roomId, 
+  roomMetadata, 
+  users, 
+  currentUserType 
+}: CollaborativeRoomProps) => {
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -129,7 +134,7 @@ const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => 
           </Header>
 
           {/* Editor */}
-          <Editor /> 
+          <Editor roomId={roomId} currentUserType={currentUserType} /> 
         </div>
       </ClientSideSuspense>
     </RoomProvider>
