@@ -20,6 +20,26 @@ declare type CreateDocumentParams = {
   email: string;
 };
 
+declare type ShareDocumentParams = {
+  roomId: string;
+  email: string;
+  userType: UserType;
+  updatedBy: User;
+};
+
+declare type ShareDocumentDialogProps = {
+  roomId: string;
+  collaborators: User[];
+  creatorId: string;
+  currentUserType: UserType;
+};
+
+declare type UserTypeSelectorParams = {
+  userType: string;
+  setUserType: React.Dispatch<React.SetStateAction<UserType>>;
+  onClickHandler?: (value: string) => void;
+};
+
 declare type AddDocumentBtnProps = {
   userId: string;
   email: string;
@@ -37,6 +57,14 @@ declare type User = {
   avatar: string;
   color: string;
   userType?: UserType;
+};
+
+declare type CollaboratorProps = {
+  roomId: string;
+  email: string;
+  creatorId: string;
+  collaborator: User;
+  user: User;
 };
 
 declare type CollaborativeRoomProps = {
