@@ -7,7 +7,6 @@ import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 
 import { useThreads } from '@liveblocks/react';
@@ -61,28 +60,39 @@ export function Editor({
         </div>
 
         <div className="h-[calc(100vh-140px)] gap-5 overflow-auto lg:flex-row lg:items-start lg:justify-center xl:gap-10 xl:pt-10 scrollbar-thin scrollbar-track-[#09090a] scrollbar-thumb-[#2e3d5b] hover:scrollbar-thumb-[#7878a3] flex mx-auto items-center gap-4">
-          {!isReady ? (
-            <div>loading</div>
-          ) : (
-            <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
-              <RichTextPlugin
-                contentEditable={
-                  <ContentEditable className="editor-input h-full" />
-                }
-                placeholder={<Placeholder />}
-                ErrorBoundary={LexicalErrorBoundary}
-              />
-              {currentUserType === 'editor' && <FloatingToolbarPlugin />}
-              <HistoryPlugin />
-              <AutoFocusPlugin />
-            </div>
-          )}
+
+          <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
+
+            {!isReady && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+                <div>loading...</div>
+              </div>
+            )}
+
+            <RichTextPlugin
+              contentEditable={
+                <ContentEditable className="editor-input h-full" />
+              }
+              placeholder={<Placeholder />}
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+
+            {currentUserType === 'editor' && <FloatingToolbarPlugin />}
+
+            {/* ✅ Only mount AutoFocusPlugin when document state is ready */}
+            {isReady && <AutoFocusPlugin />}
+          </div>
 
           <LiveblocksPlugin>
-            <FloatingComposer className="w-[350px]" />
-            <FloatingThreads threads={threads ?? []} />
-            <Comments />
-          </LiveblocksPlugin>
+              {/* ✅ Render floating UI elements only when document is fully synced */}
+              {isReady && (
+                <>
+                  <FloatingComposer className="w-[350px]" />
+                  <FloatingThreads threads={threads ?? []} />
+                  <Comments />
+                </>
+              )}
+            </LiveblocksPlugin>
         </div>
       </div>
     </LexicalComposer>
